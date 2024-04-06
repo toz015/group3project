@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style>
+        /* Style for adding space between forms */
+        form {
+            margin-bottom: 40px; /* Adjust the margin as needed */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Bidding System</h1>
+    <p>Enter an Auction ID to view its details</p>
+    <form action="{% url 'getAuction' %}" method="get">
+        <label for="auctionID">Enter AuctionID:</label>
+        <input type="text" id="auctionID" name="auctionID" required>
+        <button type="submit">search</button>
+    </form>
+
+    <p>Identify the popular car by discovering those with the highest sold(auction)
+number</p>
+    <form action="{% url 'getPopularCar' %}" method="get">
+        <button type="submit">View Popular Car</button>
+    </form>
+
+    <p>Get a list of all bids placed on a particular car</p>
+    <form action="{% url 'getVinCar' %}" method="get">
+        <label for="VIN">Enter VIN:</label>
+        <input type="text" id="VIN" name="VIN" required>
+        <button type="submit">search</button>
+    </form>
+
+
+    <p>Retrieve comprehensive information about the buyer of a product</p>
+    <form action="{% url 'getBuyerProduct' %}" method="get">
+        <label for="auctionID4">Enter AuctionID:</label>
+        <input type="text" id="auctionID4" name="auctionID4" required>
+        <button type="submit">search</button>
+    </form>
+
+    <p>Get user information</p>
+    <form action="{% url 'getUserInform' %}" method="get">
+        <label for="userID5">Enter UserID:</label>
+        <input type="text" id="userID5" name="userID5" required>
+        <button type="submit">search</button>
+    </form>
+
+    <p>Query to handle report about bidding result</p>
+    <form action="{% url 'getTimeReport' %}" method="get">
+        <button type="submit">search</button>
+    </form>
+
+    <p>Get Car information</p>
+    <form action="{% url 'getCarInform' %}" method="get">
+        <label for="VIN7">Enter VIN:</label>
+        <input type="text" id="VIN7" name="VIN7" required>
+        <button type="submit">search</button>
+    </form>
+
+    <p>Get Car Purchase information</p>
+    <form action="{% url 'getPurchaseInform' %}" method="get">
+        <label for="VIN8">Enter VIN:</label>
+        <input type="text" id="VIN8" name="VIN8" required>
+        <button type="submit">search</button>
+    </form>
+
+    <p>Check reviews for a seller</p>
+    <form action="{% url 'getReviewInform' %}" method="get">
+        <label for="SID9">Enter SID:</label>
+        <input type="text" id="SID9" name="SID9" required>
+        <button type="submit">search</button>
+    </form>
+
+    <p>Filter cars by make, model, or year</p>
+    <form action="{% url 'filterCars' %}" method="get">
+        <label for="make10">Make:</label>
+        <input type="text" id="make10" name="make">
+        <label for="model10">Model:</label>
+        <input type="text" id="model10" name="model">
+        <label for="year10">Year:</label>
+        <input type="number" id="year10" name="year10" min="1900" max="2100">
+        <br><br>
+        <button type="submit">Filter</button>
+    </form>
+
+
+    <p> Get # of cars by make, model, or year </p>
+    <form action="{% url 'filterCarsCont' %}" method="get">
+        <label for="make11">Make:</label>
+        <input type="text" id="make11" name="make">
+        <label for="model11">Model:</label>
+        <input type="text" id="model11" name="model">
+        <label for="year11">Year:</label>
+        <input type="number" id="year11" name="year" min="1900" max="2100">
+        <br><br>
+        <button type="submit">Filter</button>
+    </form>
+
+    <p>Get Seller ID filter by sold number </p>
+    <form action="{% url 'filterSellers' %}" method="get">
+        <label for="SaleCarNum">Sellers sold amount must more than:</label>
+        <input type="text" id="SaleCarNum" name="SaleCarNum" required>
+        <button type="submit">Filter</button>
+    </form>
+
+    <p>Get Buyer ID filter by bought number </p>
+    <form action="{% url 'filterBuyers' %}" method="get">
+        <label for="BuyCarNum">Buyers bought amount must more than:</label>
+        <input type="text" id="BuyCarNum" name="BuyCarNum" required>
+        <button type="submit">Filter</button>
+    </form>
+
+    <p>Get average sell price by make, model, or year </p>
+    <form action="{% url 'avgSellPrice' %}" method="get">
+        <label for="make14">Make:</label>
+        <input type="text" id="make14" name="make">
+        <label for="model14">Model:</label>
+        <input type="text" id="model14" name="model">
+        <label for="year14">Year:</label>
+        <input type="number" id="year14" name="year" min="1900" max="2100">
+        <br><br>
+        <button type="submit">Filter</button>
+    </form>
+
+    <p>Delete User</p>
+    <form action="{% url 'deleteUser' %}" method="get">
+        <label for="userID">User ID:</label>
+        <input type="text" id="userID" name="userID" required>
+        <button type="submit">Delete User</button>
+    </form>
+</body>
+</html>

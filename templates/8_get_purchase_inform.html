@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Details</title>
+</head>
+<body>
+    <h1>Purchase Details</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>OrderID</th>
+                <th>AuctionID</th>
+                <th>VIN</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>OrderDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in purchase_details %}
+            <tr>
+                <td>{{d.OrderID}}</td>
+                <td>{{d.AuctionID}}</td>
+                <td>{{d.VIN}}</td>
+                <td>{{d.Status}}</td>
+                <td>{{d.Amount}}</td>
+                <td>{{d.OrderDate}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

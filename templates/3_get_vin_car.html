@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Car Bids</title>
+</head>
+<body>
+    <h1>Car Bids</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>BidID </th>
+                <th>BidderID </th>
+                <th>AuctionID </th>
+                <th>Amount </th>
+                <th>Timestamps </th>
+                <th>IsWin </th>
+                <th>AuctionID </th>
+                <th>VIN </th>
+                <th>Status </th>
+                <th>StartPrice </th>
+                <th>HighestPrice </th>
+                <th>SellerID </th>
+                <th>BuyerID </th>
+                <th>StartDate </th>
+                <th>EndDate </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bid in vin_car_details %}
+            <tr>
+                <td>{{ bid.BidID}}</td>
+                <td>{{ bid.BidderID}}</td>
+                <td>{{ bid.AuctionID}}</td>
+                <td>{{ bid.Amount}}</td>
+                <td>{{ bid.Timestamps}}</td>
+                <td>{{ bid.IsWin}}</td>
+                <td>{{ bid.AuctionID}}</td>
+                <td>{{ bid.VIN}}</td>
+                <td>{{ bid.Status}}</td>
+                <td>{{ bid.StartPrice}}</td>
+                <td>{{ bid.HighestPrice}}</td>
+                <td>{{ bid.SellerID}}</td>
+                <td>{{ bid.BuyerID}}</td>
+                <td>{{ bid.StartDate}}</td>
+                <td>{{ bid.EndDate}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

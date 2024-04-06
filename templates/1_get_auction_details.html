@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Details</title>
+</head>
+<body>
+    <h1>Auction Details</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Auction ID</th>
+                <th>VIN</th>
+                <th>Status</th>
+                <th>Start Price</th>
+                <th>Highest Price</th>
+                <th>Seller ID</th>
+                <th>Buyer ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for auction in auction_details %}
+            <tr>
+                <td>{{ auction.AuctionID }}</td>
+                <td>{{ auction.VIN }}</td>
+                <td>{{ auction.Status }}</td>
+                <td>{{ auction.StartPrice }}</td>
+                <td>{{ auction.HighestPrice }}</td>
+                <td>{{ auction.SellerID }}</td>
+                <td>{{ auction.BuyerID }}</td>
+                <td>{{ auction.StartDate }}</td>
+                <td>{{ auction.EndDate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Summary</title>
+</head>
+<body>
+    <h1>Report Summary</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>BidID</th>
+                <th>BidderID</th>
+                <th>AuctionID</th>
+                <th>Amount</th>
+                <th>Timestamps</th>
+                <th>IsWin</th>
+                <th>OneWeek</th>
+                <th>TwoWeek</th>
+                <th>Month</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in report_details %}
+            <tr>
+                <td>{{d.BidID}}</td>
+                <td>{{d.BidderID}}</td>
+                <td>{{d.AuctionID}}</td>
+                <td>{{d.Amount}}</td>
+                <td>{{d.Timestamps}}</td>
+                <td>{{d.IsWin}}</td>
+                <td>{{d.OneWeek}}</td>
+                <td>{{d.TwoWeek}}</td>
+                <td>{{d.Month}}</td>
+                <td>{{d.Year}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

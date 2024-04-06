@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Car</title>
+</head>
+<body>
+    <h1>Popular Car</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>VIN</th>
+                <th>BidNum</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in car_details %}
+            <tr>
+                <td>{{ car.VIN }}</td>
+                <td>{{ car.BidNum}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Details</title>
+</head>
+<body>
+    <h1>Buyer Details</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>UserID</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Password</th>
+                <th>Address</th>
+                <th>UserType</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in buyer_details %}
+            <tr>
+                <td>{{d.UserID}}</td>
+                <td>{{d.FirstName}}</td>
+                <td>{{d.LastName}}</td>
+                <td>{{d.Email}}</td>
+                <td>{{d.Phone}}</td>
+                <td>{{d.Password}}</td>
+                <td>{{d.Address}}</td>
+                <td>{{d.UserType}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
