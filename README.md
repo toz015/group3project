@@ -1,0 +1,1 @@
+This project is group 3 phase 5 for CS5200 Database Management Course. We using GCP to deploy our project with backend as the database. Our project focus on Cars Bidding System with multi queries to achive operation and business for long term growth. 
