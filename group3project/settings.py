@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'group3project.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'group3_project',
-            'USER': 'root',
-            'PASSWORD': 'Zt8120##',
+            'NAME': 'your_database_name',
+            'USER': 'your_username',
+            'PASSWORD': 'your_password',
             'HOST': 'localhost',
             'PORT': '3306'
         }
