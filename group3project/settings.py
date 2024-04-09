@@ -74,16 +74,46 @@ WSGI_APPLICATION = 'group3project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
+# For local connection
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'your_database_name',
+#             'USER': 'your_username',
+#             'PASSWORD': 'your_password',
+#             'HOST': 'localhost',
+#             'PORT': '3306'
+#         }
+# }
+
+# Database
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+import pymysql # noqa: 402
+pymysql.version_info = (1, 4, 6, 'final', 0) # change mysqlclient version
+pymysql.install_as_MySQLdb()
+# [START db_setup]
+if os.getenv('GAE_APPLICATION', None):
+    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'your_database_name',
-            'USER': 'your_username',
-            'PASSWORD': 'your_password',
+            'HOST': '/cloudsql/[MySQL Connection Name]',
+            'USER': 'username',
+            'PASSWORD': 'password',
+            'NAME': 'database_name',
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'database_name',
+            'USER': 'username',
+            'PASSWORD': 'password',
             'HOST': 'localhost',
             'PORT': '3306'
         }
-}
+    }
+# [END db_setup]
 
 
 # Password validation
