@@ -74,7 +74,6 @@ WSGI_APPLICATION = 'group3project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# For local connection
 # DATABASES = {
 #         'default': {
 #             'ENGINE': 'django.db.backends.mysql',
@@ -96,19 +95,19 @@ if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/[MySQL Connection Name]',
-            'USER': 'username',
-            'PASSWORD': 'password',
-            'NAME': 'database_name',
+            'HOST': '/cloudsql/finalproject-419105:us-west1:bid-dbms',
+            'USER': 'root',
+            'PASSWORD': 'hide_password',
+            'NAME': 'project',
         }
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'database_name',
-            'USER': 'username',
-            'PASSWORD': 'password',
+            'NAME': 'project',
+            'USER': 'root',
+            'PASSWORD': '123456',
             'HOST': 'localhost',
             'PORT': '3306'
         }

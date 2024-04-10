@@ -75,10 +75,13 @@ number</p>
 
     <p>Filter cars by make, model, or year</p>
     <form action="{% url 'filterCars' %}" method="get">
+
         <label for="make10">Make:</label>
-        <input type="text" id="make10" name="make">
+        <input type="text" id="make10" name="make10">
+
         <label for="model10">Model:</label>
-        <input type="text" id="model10" name="model">
+        <input type="text" id="model10" name="model10">
+
         <label for="year10">Year:</label>
         <input type="number" id="year10" name="year10" min="1900" max="2100">
         <br><br>
@@ -89,11 +92,11 @@ number</p>
     <p> Get # of cars by make, model, or year </p>
     <form action="{% url 'filterCarsCont' %}" method="get">
         <label for="make11">Make:</label>
-        <input type="text" id="make11" name="make">
+        <input type="text" id="make11" name="make11">
         <label for="model11">Model:</label>
-        <input type="text" id="model11" name="model">
+        <input type="text" id="model11" name="model11">
         <label for="year11">Year:</label>
-        <input type="number" id="year11" name="year" min="1900" max="2100">
+        <input type="number" id="year11" name="year11" min="1900" max="2100">
         <br><br>
         <button type="submit">Filter</button>
     </form>
@@ -115,11 +118,11 @@ number</p>
     <p>Get average sell price by make, model, or year </p>
     <form action="{% url 'avgSellPrice' %}" method="get">
         <label for="make14">Make:</label>
-        <input type="text" id="make14" name="make">
+        <input type="text" id="make14" name="make14">
         <label for="model14">Model:</label>
-        <input type="text" id="model14" name="model">
+        <input type="text" id="model14" name="model14">
         <label for="year14">Year:</label>
-        <input type="number" id="year14" name="year" min="1900" max="2100">
+        <input type="number" id="year14" name="year14" min="1900" max="2100">
         <br><br>
         <button type="submit">Filter</button>
     </form>
@@ -132,3 +135,60 @@ number</p>
     </form>
 </body>
 </html>
+
+
+
+def filter_cars_sql(request):
+    try:
+        make = request.GET.get('make10')
+        model = request.GET.get('model10')
+        year = request.GET.get('year10')
+
+        cursor = connection.cursor()
+        query = "SELECT * FROM CAR WHERE"
+        params = []
+
+        if make:
+            query += " Make = %s"
+            params.append(make)
+        if model:
+            if params:
+                query += " AND"
+            query += " Model = %s"
+            params.append(model)
+        if year:
+            if params:
+                query += " AND"
+            query += " Year = %s"
+            params.append(year)
+
+        if not params:
+            query = "SELECT * FROM CAR"
+        print(params)
+        cursor.execute(query, params)
+        filtered_cars = cursor.fetchall()
+
+        car_details = [
+            {
+                'VIN': row[0],
+                'Make': row[1],
+                'Model': row[2],
+                'Year': row[3],
+                'Mileage': row[4],
+                'Condition': row[5]
+            }
+            for row in filtered_cars
+        ]
+
+        context = {
+            'car_details': car_details
+        }
+
+        return render(request, '10_filter_cars.html', context)
+    except OperationalError as e:
+        error_message = str(e)
+        return render(request, 'error.html', {'error_message': error_message})
+
+    except Exception as e:
+        error_message = "An unexpected error occurred: " + str(e)
+        return render(request, 'error.html', {'error_message': error_message})
