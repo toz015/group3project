@@ -97,7 +97,7 @@ if os.getenv('GAE_APPLICATION', None):
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '/cloudsql/finalproject-419105:us-west1:bid-dbms',
             'USER': 'root',
-            'PASSWORD': 'hide_password',
+            'PASSWORD': 'your_password',
             'NAME': 'project',
         }
     }

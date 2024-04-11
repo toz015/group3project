@@ -345,7 +345,7 @@ def get_review_inform_sql(request):
                 FROM `Order` as o LEFT JOIN Review ON o.OrderID = Review.OrderID
                 WHERE VIN IN
                 (SELECT VIN
-                FROM POST
+                FROM Post
                 WHERE SellerID = %s)
                 """
         cursor.execute(query, [SID])
@@ -376,7 +376,7 @@ def filter_cars_sql(request):
         year = request.GET.get('year10')
 
         cursor = connection.cursor()
-        query = "SELECT * FROM CAR WHERE"
+        query = "SELECT * FROM Car WHERE"
         params = []
 
         if make:
@@ -394,7 +394,10 @@ def filter_cars_sql(request):
             params.append(year)
 
         if not params:
-            query = "SELECT * FROM CAR"
+            query = "SELECT * FROM Car"
+
+        print('testing filter car sql query:')
+        print(query)
 
         cursor.execute(query, params)
         filtered_cars = cursor.fetchall()
@@ -431,7 +434,7 @@ def filter_cars_cont_sql(request):
         year = request.GET.get('year11')
 
         cursor = connection.cursor()
-        query = "SELECT COUNT(VIN) AS NumCars FROM CAR WHERE"
+        query = "SELECT COUNT(VIN) AS NumCars FROM Car WHERE"
         params = []
 
         if make:
@@ -449,7 +452,7 @@ def filter_cars_cont_sql(request):
             params.append(year)
 
         if not params:
-            query = "SELECT COUNT(VIN) AS NumCars FROM CAR"
+            query = "SELECT COUNT(VIN) AS NumCars FROM Car"
 
         cursor.execute(query, params)
         filtered_cars = cursor.fetchall()
@@ -547,47 +550,92 @@ def filter_buyers_sql(request):
         error_message = "An unexpected error occurred: " + str(e)
         return render(request, 'error.html', {'error_message': error_message})
 
+# def avg_sell_price_sql(request):
+#     try:
+#         make = request.GET.get('make14')
+#         model = request.GET.get('model14')
+#         year = request.GET.get('year14')
+
+#         cursor = connection.cursor()
+#         query = f"""
+#                 SELECT AVG(Amount) as AvgSellPrice
+#                 FROM Car as c
+#                 INNER JOIN `Order` as o on c.VIN = o.VIN
+#                 WHERE"""
+
+#         params = []
+
+#         if make:
+#             query += " Make = %s"
+#             params.append(make)
+#         if model:
+#             if params:
+#                 query += " AND"
+#             query += " Model = %s"
+#             params.append(model)
+#         if year:
+#             if params:
+#                 query += " AND"
+#             query += " Year = %s"
+#             params.append(year)
+
+#         if not params:
+#             query = "SELECT AVG(Amount) as AvgSellPrice FROM Car as c INNER JOIN `Order` as o on c.VIN = o.VIN"
+
+#         cursor.execute(query)
+#         avg_sell_price = cursor.fetchall()
+
+#         avg_sell_price_details = [
+#             {
+#                 'AvgSellPrice': row[0]
+#             }
+#             for row in avg_sell_price
+#         ]
+
+#         context = {
+#             'avg_sell_price_details': avg_sell_price_details
+#         }
+#         return render(request, '14_avg_sell_price.html', context)
+
+#     except OperationalError as e:
+#         error_message = str(e)
+#         return render(request, 'error.html', {'error_message': error_message})
+
+#     except Exception as e:
+#         error_message = "An unexpected error occurred: " + str(e)
+#         return render(request, 'error.html', {'error_message': error_message})
+
+
+# Fix misuse of parameterized queries
 def avg_sell_price_sql(request):
     try:
         make = request.GET.get('make14')
         model = request.GET.get('model14')
         year = request.GET.get('year14')
 
-        cursor = connection.cursor()
-        query = f"""
-                SELECT AVG(Amount) as AvgSellPrice
-                FROM CAR as c
-                INNER JOIN `Order` as o on c.VIN = o.VIN
-                WHERE"""
+        query = """
+                SELECT AVG(Amount) AS AvgSellPrice
+                FROM Car AS c
+                INNER JOIN `Order` AS o ON c.VIN = o.VIN
+                WHERE 1=1"""  # Use WHERE 1=1 for easier query concatenation
 
         params = []
 
         if make:
-            query += " Make = %s"
+            query += " AND Make = %s"
             params.append(make)
         if model:
-            if params:
-                query += " AND"
-            query += " Model = %s"
+            query += " AND Model = %s"
             params.append(model)
         if year:
-            if params:
-                query += " AND"
-            query += " Year = %s"
+            query += " AND Year = %s"
             params.append(year)
 
-        if not params:
-            query = "SELECT AVG(Amount) as AvgSellPrice FROM CAR as c INNER JOIN `Order` as o on c.VIN = o.VIN"
-
-        cursor.execute(query)
+        cursor = connection.cursor()
+        cursor.execute(query, params)  # Pass parameters as a second argument
         avg_sell_price = cursor.fetchall()
 
-        avg_sell_price_details = [
-            {
-                'AvgSellPrice': row[0]
-            }
-            for row in avg_sell_price
-        ]
+        avg_sell_price_details = [{'AvgSellPrice': row[0]} for row in avg_sell_price]
 
         context = {
             'avg_sell_price_details': avg_sell_price_details
